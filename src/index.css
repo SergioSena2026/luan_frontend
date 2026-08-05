@@ -1,0 +1,11 @@
+/* ============================================================================
+   INDEX.CSS - Punto de entrada de los estilos de la aplicación
+   ============================================================================
+   
+   En Tailwind CSS v4, la forma de importar cambió.
+   Ahora usamos @import en lugar de las directivas @tailwind.
+   
+   @import "tailwindcss"  → Importa todo Tailwind CSS (base, components, utilities)
+   ============================================================================ */
+
+@import "tailwindcss";
