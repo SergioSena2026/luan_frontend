@@ -24,6 +24,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import NuevoTicket from './pages/NuevoTicket';
 
 function App() {
   return (
@@ -82,11 +83,7 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['RECEPCIONISTA', 'SUPERVISOR']}>
                 <StaffLayout>
-                  {/* Por ahora mostramos un placeholder. La página real se crea en otra sesión */}
-                  <div className="bg-white rounded-xl shadow-sm p-8">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">Nuevo Ticket</h2>
-                    <p className="text-gray-500">Esta página se construirá en la siguiente sesión de trabajo.</p>
-                  </div>
+                  <NuevoTicket />
                 </StaffLayout>
               </ProtectedRoute>
             } 
