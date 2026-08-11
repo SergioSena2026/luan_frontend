@@ -73,10 +73,11 @@ export const AuthProvider = ({ children }) => {
     
     // Armamos el objeto de usuario con los datos que nos devolvió el backend
     const userData = {
+      id: data.id,              // ID numérico del usuario
       token: data.token,        // El JWT que Spring Boot generó
       nombre: data.nombre,      // Nombre del usuario
       correo: data.correo,      // Correo del usuario
-      roles: data.roles || []   // Array de roles (ej: ['ADMINISTRADOR'])
+      roles: data.roles || []   // Array de roles
     };
     
     // Guardamos en el estado de React (memoria viva de la app)

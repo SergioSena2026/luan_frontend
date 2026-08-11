@@ -20,6 +20,7 @@ import PasoCliente from '../components/PasoCliente';
 import PasoEquipo from '../components/PasoEquipo';
 import PasoTicket from '../components/PasoTicket';
 import PasoTecnico from '../components/PasoTecnico';
+import PasoComprobante from '../components/PasoComprobante';
 
 const NuevoTicket = () => {
   
@@ -143,11 +144,20 @@ const NuevoTicket = () => {
           />
         );
       
-      case 5:
+            case 5:
         return (
           <PasoComprobante 
             formData={formData}
-            onFinalizar={finalizarTicket}
+            onFinalizar={() => {
+              // Reiniciamos el wizard para crear otro ticket
+              setPasoActual(1);
+              setFormData({
+                cliente: null,
+                equipo: null,
+                ticket: null,
+                tecnico: null
+              });
+            }}
             onVolver={anteriorPaso}
           />
         );
@@ -207,39 +217,5 @@ const NuevoTicket = () => {
   );
 };
 
-// =============================================================================
-// COMPONENTES PLACEHOLDER DE CADA PASO
-// =============================================================================
-// Estos componentes se reemplazarán por versiones completas en esta y 
-// siguientes sesiones. Por ahora permiten navegar el wizard sin errores.
-// =============================================================================
-
-const PasoComprobante = ({ formData, onFinalizar, onVolver }) => (
-  <div>
-    <h3 className="text-lg font-semibold text-gray-800 mb-4">Paso 5: Comprobante</h3>
-    <p className="text-gray-500 mb-4">Resumen del ticket y generación del comprobante.</p>
-    
-    <div className="bg-gray-50 rounded-lg p-4 mb-4">
-      <pre className="text-xs text-gray-600 overflow-auto">
-        {JSON.stringify(formData, null, 2)}
-      </pre>
-    </div>
-
-    <div className="flex justify-between">
-      <button
-        onClick={onVolver}
-        className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50"
-      >
-        ← Anterior
-      </button>
-      <button
-        onClick={onFinalizar}
-        className="px-6 py-2.5 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700"
-      >
-        ✓ Generar Ticket
-      </button>
-    </div>
-  </div>
-);
 
 export default NuevoTicket;

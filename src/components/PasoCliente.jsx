@@ -192,10 +192,26 @@ const PasoCliente = ({ datos, onGuardar }) => {
   // -------------------------------------------------------------------------
   // FUNCIÓN: Guardar cliente (crear nuevo o actualizar existente)
   // -------------------------------------------------------------------------
+  // LIMPIEZA DE DATOS: Convertimos strings vacíos a null para campos opcionales.
+  // Esto evita errores de "Duplicate entry ''" en MySQL cuando la cédula está vacía
+  // pero tiene restricción UNIQUE en la base de datos.
+  // -------------------------------------------------------------------------
   const handleGuardar = async () => {
     if (!validarFormulario()) return;
     
     setGuardando(true);
+    
+    // Limpiamos los datos: campos opcionales vacíos se convierten a null
+    const datosLimpios = {
+      nombre: formData.nombre.trim(),
+      apellido: formData.apellido.trim(),
+      telefono: formData.telefono.trim(),
+      whatsApp: formData.whatsApp.trim(),
+      // Campos opcionales: si están vacíos, enviamos null en lugar de ""
+      cedula: formData.cedula.trim() || null,
+      correo: formData.correo.trim() || null,
+      direccion: formData.direccion.trim() || null
+    };
     
     try {
       let clienteGuardado;
@@ -204,11 +220,11 @@ const PasoCliente = ({ datos, onGuardar }) => {
         // Actualizar cliente existente
         clienteGuardado = await clienteService.actualizarCliente(
           clienteSeleccionado.id,
-          formData
+          datosLimpios
         );
       } else {
         // Crear cliente nuevo
-        clienteGuardado = await clienteService.crearCliente(formData);
+        clienteGuardado = await clienteService.crearCliente(datosLimpios);
       }
       
       // Entregamos los datos al componente padre (NuevoTicket) y avanzamos
@@ -220,6 +236,8 @@ const PasoCliente = ({ datos, onGuardar }) => {
       // Manejar errores específicos del backend (409 = conflicto/ya existe)
       if (err.response?.status === 409) {
         setErrores({ general: err.response.data?.message || 'El cliente ya existe.' });
+      } else if (err.response?.status === 400) {
+        setErrores({ general: err.response.data?.message || 'Error en los datos enviados. Verifica los campos.' });
       } else {
         setErrores({ general: 'Error al guardar el cliente. Intenta de nuevo.' });
       }
