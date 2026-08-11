@@ -19,6 +19,7 @@ import WizardSteps from '../components/WizardSteps';
 import PasoCliente from '../components/PasoCliente';
 import PasoEquipo from '../components/PasoEquipo';
 import PasoTicket from '../components/PasoTicket';
+import PasoTecnico from '../components/PasoTecnico';
 
 const NuevoTicket = () => {
   
@@ -212,19 +213,6 @@ const NuevoTicket = () => {
 // Estos componentes se reemplazarán por versiones completas en esta y 
 // siguientes sesiones. Por ahora permiten navegar el wizard sin errores.
 // =============================================================================
-
-const PasoTecnico = ({ datos, onGuardar, onVolver }) => (
-  <div>
-    <h3 className="text-lg font-semibold text-gray-800 mb-4">Paso 4: Asignar Técnico</h3>
-    <p className="text-gray-500">Lista de técnicos disponibles filtrados por especialidad.</p>
-    <button
-      onClick={() => onGuardar({ id: 1, nombre: 'Técnico Demo' })}
-      className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
-    >
-      Simular técnico asignado
-    </button>
-  </div>
-);
 
 const PasoComprobante = ({ formData, onFinalizar, onVolver }) => (
   <div>
