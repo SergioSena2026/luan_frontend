@@ -18,6 +18,7 @@ import { useState } from 'react';
 import WizardSteps from '../components/WizardSteps';
 import PasoCliente from '../components/PasoCliente';
 import PasoEquipo from '../components/PasoEquipo';
+import PasoTicket from '../components/PasoTicket';
 
 const NuevoTicket = () => {
   
@@ -211,20 +212,6 @@ const NuevoTicket = () => {
 // Estos componentes se reemplazarán por versiones completas en esta y 
 // siguientes sesiones. Por ahora permiten navegar el wizard sin errores.
 // =============================================================================
-
-
-const PasoTicket = ({ datos, onGuardar, onVolver }) => (
-  <div>
-    <h3 className="text-lg font-semibold text-gray-800 mb-4">Paso 3: Datos del Ticket</h3>
-    <p className="text-gray-500">Falla reportada, características de ingreso, accesorios.</p>
-    <button
-      onClick={() => onGuardar({ fallaReportada: 'No enciende' })}
-      className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
-    >
-      Simular datos del ticket
-    </button>
-  </div>
-);
 
 const PasoTecnico = ({ datos, onGuardar, onVolver }) => (
   <div>
