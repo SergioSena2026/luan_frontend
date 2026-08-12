@@ -25,6 +25,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 import NuevoTicket from './pages/NuevoTicket';
+import DashboardTecnico from './pages/DashboardTecnico';
 
 function App() {
   return (
@@ -95,10 +96,7 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['TECNICO', 'SUPERVISOR']}>
                 <StaffLayout>
-                  <div className="bg-white rounded-xl shadow-sm p-8">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4">Dashboard Técnico</h2>
-                    <p className="text-gray-500">Esta página se construirá en la siguiente sesión de trabajo.</p>
-                  </div>
+                  <DashboardTecnico />
                 </StaffLayout>
               </ProtectedRoute>
             } 
